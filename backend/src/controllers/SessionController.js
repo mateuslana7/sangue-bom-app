@@ -19,7 +19,7 @@ module.exports = {
         const usuario = await connection('usuario')
 	        .where('nomeUsuario', nomeUsuario)
 	        .where('senha', senha)
-	        .select('nome')
+	        .select('nome', 'id')
 	        .first();
         
         if(!usuario){
