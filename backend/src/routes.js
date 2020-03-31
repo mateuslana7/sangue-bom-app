@@ -12,9 +12,9 @@ routes.post('/sessions', SessionController.create);
 routes.get('/usuarios', UsuarioController.index);
 routes.post('/usuario', UsuarioController.create);
 
+routes.get('/exames', PerfilController.listExams);
 routes.get('/perfil', PerfilController.index);
 
-routes.get('/exames', ExameController.index);
 routes.post('/exames', ExameController.create);
 routes.delete('/exames/:id', ExameController.delete);
 

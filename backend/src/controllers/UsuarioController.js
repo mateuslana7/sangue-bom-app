@@ -1,5 +1,7 @@
 const connection = require('../database/connection')
-// const crypto = require('crypto');
+const bcrypt = require('bcrypt');
+const encrypt = require('./PasswordController');
+const generateUniqueId = require('../utils/generateUniqueId');
 
 module.exports = {
 
@@ -9,9 +11,14 @@ module.exports = {
     },
 
     async create(request, response){
-        const {id, nome, dataNasc, peso, sexo, tipoSang, nomeUsuario, email, senha} = request.body;
+        var {nome, dataNasc, peso, sexo, tipoSang, nomeUsuario, email, senha} = request.body;
 
-        //FAZER A CRIPTOGRAFIA DA SENHA DPS
+        //CRIPTOGRAFIA DA SENHA 
+        const salt = encrypt.getSalt();
+        senha = bcrypt.hashSync(senha, salt)
+
+        //GERANDO O ID DO USUARIO
+        const id = generateUniqueId();
 
         await connection('usuario').insert({
             id,

@@ -1,12 +1,6 @@
 const connection = require('../database/connection');
 
 module.exports = {
-    async index(request, response){
-        const exames = await connection('exame').select('*');
-
-        return response.json(exames);
-    },
-
     async create(request, response){
         const { dataExame, valorHdl, valorLdl, consultorio } = request.body;
         const usuario_id = request.headers.authorization;
