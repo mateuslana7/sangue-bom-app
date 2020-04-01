@@ -32,6 +32,34 @@ module.exports = {
         await connection('exame').where('id', id).delete();
 
         return response.status(204).send();
+    },
+
+    async edit(request, response){
+        const { dataExame, valorHdl, valorLdl, consultorio } = request.body;
+        const { id } = request.params;
+        const usuario_id = request.headers.authorization;
+
+        const exame = await connection('exame')
+            .where('id', id)
+            .select('*')
+            .first();
+        
+        if(exame.usuario_id !== usuario_id){
+            return response.status(401).json({error: 'Operation not permitted.'});
+        }
+
+        //MELHORAR DEPOIS
+        if(exame.dataExame !== dataExame)
+            await connection('exame').where('id', id).update('dataExame', dataExame);
+        if(exame.valorHdl !== valorHdl)  
+            await connection('exame').where('id', id).update('valorHdl', valorHdl);
+        if(exame.valorLdl !== valorLdl)    
+            await connection('exame').where('id', id).update('valorLdl', valorLdl);
+        if(exame.consultorio !== consultorio)    
+            await connection('exame').where('id', id).update('consultorio', consultorio);  
+
+
+        return response.status(204).send();
         
     }
 };
