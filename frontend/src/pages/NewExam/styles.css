@@ -1,0 +1,53 @@
+.newexam-container {
+    width: 100%;
+    max-width: 1180px;
+    padding: 0 30px;
+    margin: 32px auto;
+}
+
+.newexam-container header {
+    display: flex;
+    align-items: center;
+}
+
+.middle-box form{
+    margin: 10px;
+}
+
+.newexam-screen.middle-box {
+    margin: 80px auto;
+    width: 600px;
+    height: 400px;
+}
+
+/* ARRUMAR DEPOIS DAQUI PRA BAIXO */
+/* .form-control,
+.single-line {
+  background-color: #FFFFFF;
+  background-image: none;
+  border: 1px solid #e5e6e7;
+  border-radius: 1px;
+  color: inherit;
+  display: block;
+  padding: 6px 12px;
+  transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+  width: 100%;
+  font-size: 14px;
+}
+
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+} */

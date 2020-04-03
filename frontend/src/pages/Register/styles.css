@@ -1,0 +1,26 @@
+.register-container {
+    width: 100%;
+    max-width: 1120px;
+    height: 100vh;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.middle-box form{
+    margin: 10px;
+}
+
+.registerscreen.middle-box {
+    /* margin: 20px; */
+    display: inline;
+    align-items: baseline;
+    width: 700px;
+    height: 480px;
+}
+
+.radiobutton {
+    margin: 5px;
+}

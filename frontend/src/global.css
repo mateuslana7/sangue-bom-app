@@ -1,0 +1,153 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    outline: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font: 400 14px Roboto, sans-serif;
+    background-image: url('./assets/background.png');
+    background-size: cover;
+    -webkit-font-smoothing: antialiased;
+}
+
+input, button, textarea{
+    font: 400 18px Roboto, sans-serif;
+}
+
+button, a {
+    cursor: pointer;
+}
+
+p {
+    color: #903031;
+}
+
+header span {
+    margin-left: 24px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #903031;
+}
+
+header button {
+    height: 60px;
+    width: 60px;
+    border-radius: 4px;
+    border: 1px solid #999;
+    margin-left: auto;
+    margin-top: 0;
+    background: #CF3537;
+    transition: border-color 0.2s;
+}
+
+header button:hover {
+    border-color: #dcdcd6;
+}
+
+.absolute {
+    height: 50px;
+    width: 200px;
+    position: absolute;
+    top: 55px;
+    right: 250px;
+}
+
+.absolute-userprofile {
+    height: 50px;
+    width: 200px;
+    position: absolute;
+    top: 38px;
+    right: 180px;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 1120px;
+    height: 100vh;
+    margin: 0 auto;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.middle-box {
+    z-index: 100;
+    margin: 20px;
+    background-color: #FFF;
+    border: 3px solid #ced4da;
+    border-radius: 16px;
+
+    display: flex;
+    /* flex-direction: column; */
+    align-items: center;
+    justify-content: center;
+}
+
+.middle-box label{
+    margin-top: 10px;
+    color: #903031;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.button{
+    width: 100%;
+    height: 40px;
+    background: #CF3537;
+    border: 0;
+    border-radius: 8px;
+    color: #FFF;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    transition: filter 0.2s;
+    margin-top: 10px;
+}
+
+.button-back {
+    width: 100%;
+    height: 40px;
+    background: #434649;
+    border: 0;
+    border-radius: 8px;
+    color: #FFF;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+    transition: filter 0.2s;
+    margin-top: 10px;
+}
+
+.grey-button {
+    height: 60px;
+    width: 60px;
+    border-radius: 4px;
+    border: 1px solid #999;
+    margin-left: auto;
+    margin-top: 0;
+    background: #ced4da;
+    transition: border-color 0.2s;
+}
+
+.grey-button:hover{
+    border-color: #CF3537;
+}
+
+.button:hover{
+    filter: brightness(80%)
+}
+
+/* .logo-img{
+    margin: 10px;
+} */
+
+.main-header .navbar {
+    background-color: #CF3537;
+    color: #ced4da;
+}
+

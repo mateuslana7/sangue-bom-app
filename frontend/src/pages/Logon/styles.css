@@ -1,0 +1,28 @@
+.middle-box img{
+    max-width:80px;
+    max-height:80px;
+    margin-top: 0px;
+    margin-left: 0px;
+    margin-right: 30px;
+    margin-bottom: 50px;
+    width: auto;
+    height: auto;
+}
+
+.middle-box form{
+    margin-top: 40px;
+}
+
+.middle-box a:hover{
+    opacity: 0.8;
+}
+
+.loginscreen.middle-box {
+  width: 400px;
+  height: 280px;
+}
+
+.login-footnote {
+    margin-top: 20px;
+    display: flex;
+}

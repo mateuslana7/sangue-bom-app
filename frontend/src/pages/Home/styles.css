@@ -1,0 +1,39 @@
+/* VER DPS */
+.home-container {
+    width: 100%;
+    max-width: 1180px;
+    padding: 0 30px;
+    margin: 32px auto;
+}
+
+.home-container header {
+    display: flex;
+    align-items: center;
+}
+
+.home-container ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 24px;
+    list-style: none;
+}
+
+.home-container ul li {
+    position: relative;
+}
+
+.home-container ul li img {
+    margin-bottom: 0px;
+    margin-top: 20px;
+    margin-left: 25px;
+}
+
+.home-screen.middle-box {
+    margin: 80px auto;
+    width: 600px;
+    height: 400px;
+}
+
+.logo-img{
+    margin: 10px;
+}
