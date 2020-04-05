@@ -16,6 +16,23 @@ module.exports = {
         return response.json({ id })
     },
 
+    async examById(request, response){
+        const usuario_id = request.headers.authorization;
+        const { id } = request.params;
+
+        const exame = await connection('exame')
+            .where('id', id)
+            .select('usuario_id','consultorio', 'dataExame', 'valorHdl', 'valorLdl')
+            .first();
+        
+        if(exame.usuario_id !== usuario_id){
+            return response.status(401).json({error: 'Operation not permitted.'});
+        }
+
+        return response.json(exame);
+
+    },
+
     async delete(request, response){
         const { id } = request.params;
         const usuario_id = request.headers.authorization;

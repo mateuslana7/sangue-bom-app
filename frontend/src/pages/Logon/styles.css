@@ -1,10 +1,7 @@
 .middle-box img{
-    max-width:80px;
-    max-height:80px;
-    margin-top: 0px;
-    margin-left: 0px;
-    margin-right: 30px;
-    margin-bottom: 50px;
+    max-width: 80px;
+    max-height: 80px;
+    margin: 20px 20px 20px 20px;
     width: auto;
     height: auto;
 }
@@ -25,4 +22,5 @@
 .login-footnote {
     margin-top: 20px;
     display: flex;
+    text-align: ;
 }

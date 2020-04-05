@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { FaTrashAlt, FaPencilAlt, FaSort } from 'react-icons/fa';
 import { Link } from 'react-router-dom';
+import swal from 'sweetalert';
 
 import api from '../../services/api';
 
@@ -14,12 +15,34 @@ export default function Exams(){
 
     const usuarioId = localStorage.getItem('usuarioId');
 
+    async function deleteAlert(id){
+        swal({
+            title: "Atenção",
+            text: "Você tem certeza que deseja deletar este exame ?",
+            icon: "warning",
+            buttons: ["Cancelar", "Confirmar"],
+            dangerMode: true,
+          })
+          .then(async (willDelete) => {
+            if (willDelete) {
+              await handleDeleteExam(id);
+              swal("Pronto! Este exame foi deletado!", {
+                icon: "success",
+              });
+            }
+        });
+    }
+
     useEffect(() => {
         api.get('exames',{
             headers: {
                 Authorization: usuarioId,
             }
         }).then(response => {
+            response.data.map(exame => {
+                exame.dataExame = new Date(exame.dataExame);
+                return true;
+            })
             setExames(response.data);
         })
     },[usuarioId]);
@@ -37,6 +60,19 @@ export default function Exams(){
         }
     }
 
+    async function handleEditExam(id){
+        try {
+            const response = await api.get(`exames/${id}`, {
+                headers: {
+                    Authorization: usuarioId,
+                }
+            });
+            console.log(response.data);
+        } catch (err) {
+            alert('Erro ao obter exame!');
+        }
+    }
+
     return (
         <div className="exams-container">
             <Header />
@@ -45,26 +81,26 @@ export default function Exams(){
                     <table className="table table-striped table-bordered table-sm">
                         <thead>
                             <tr>
-                            <th>Data Exame <a><FaSort/></a></th>
-                            <th>Nível de HDL <a><FaSort/></a></th>
-                            <th>Nível de LDL <a><FaSort/></a></th>
+                            <th>Data Exame <FaSort/></th>
+                            <th>Nível de HDL <FaSort/></th> 
+                            <th>Nível de LDL <FaSort/></th> 
                             <th>Ação</th>
                             </tr>
                         </thead>
                         <tbody>
                             {exames.map(exame => (
                                 <tr key={exame.id}>
-                                <th>{exame.dataExame}</th>
+                                <th>{Intl.DateTimeFormat('pt-BR').format(exame.dataExame)}</th>
                                 <td>{exame.valorHdl}</td>
                                 <td>{exame.valorLdl}</td>
                                 <td>
                                     <div className="button-group">
-                                        <Link to="/exames/editar">
+                                        <Link onClick={() => handleEditExam(exame.id)} to="/exames/editar">
                                             <button className="button-edit">
                                                 <FaPencilAlt size={18} color="#fff"></FaPencilAlt>
                                             </button>
                                         </Link>
-                                        <button onClick={() => handleDeleteExam(exame.id)} className="button-delete">
+                                        <button onClick={() => deleteAlert(exame.id)} className="button-delete">
                                             <FaTrashAlt size={18} color="#fff"></FaTrashAlt>
                                         </button>
                                     </div>

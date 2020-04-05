@@ -1,0 +1,22 @@
+.middle-box img {
+    max-width: 300px;
+}
+
+.contact-middle-box {
+    flex-direction: column;
+}
+
+.text-style{
+    text-align: justify;
+    /* font-weight: bold; */
+    font-size: 16px;
+    margin: 25px;
+}
+
+.group-icons {
+    font-size: 40px;
+}
+
+.icon-style {
+    margin-right: 5px;
+}

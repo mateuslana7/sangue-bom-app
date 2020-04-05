@@ -22,6 +22,19 @@ button, a {
     cursor: pointer;
 }
 
+a {
+    color: #903031;
+}
+
+a:hover {
+    color: #CF3537;
+}
+
+h4 {
+    color: #903031;
+    text-align: center;
+}
+
 p {
     color: #903031;
 }
@@ -71,13 +84,30 @@ header button:hover {
     margin: 0 auto;
 
     display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.aba {
+    width: 25%;
+    height: 30px;
+    background: #CF3537;
+    border: 0;
+    border-radius: 20px;
+    color: #FFF;
+    font-weight: bold;
+    font-size: 18px;
+    text-transform: uppercase;
+
+    display: flex;
     align-items: center;
     justify-content: center;
 }
 
 .middle-box {
     z-index: 100;
-    margin: 20px;
+    margin: 0px 20px 20px 20px;
     background-color: #FFF;
     border: 3px solid #ced4da;
     border-radius: 16px;
@@ -142,12 +172,22 @@ header button:hover {
     filter: brightness(80%)
 }
 
-/* .logo-img{
-    margin: 10px;
-} */
-
-.main-header .navbar {
+.navbar {
     background-color: #CF3537;
-    color: #ced4da;
 }
 
+.navbar-right {
+    position: fixed;
+    right: 120px;
+}
+
+.nav-link {
+    color: #FFF;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+.nav-link:hover {
+    color: #FFF;
+    font-weight: bold;
+}

@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import Header from '../shared/Header';
+// import Header from '../Logon/Header';
 import './styles.css';
 
 import addImg from '../../assets/add.png';
@@ -11,7 +12,6 @@ import deleteImg from '../../assets/delete.png';
 
 export default function Home(){
     return (
-        
         <div className="home-container">
             <Header/>
             <div className="middle-box text-center home-screen">

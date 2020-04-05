@@ -20,5 +20,6 @@ routes.delete('/perfil', PerfilController.delete);
 routes.post('/exames', ExameController.create);
 routes.delete('/exames/:id', ExameController.delete);
 routes.put('/exames/:id', ExameController.edit)
+routes.get('/exames/:id', ExameController.examById);
 
 module.exports = routes;

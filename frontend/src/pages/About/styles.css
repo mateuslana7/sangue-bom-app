@@ -1,0 +1,15 @@
+.about-middle-box {
+    flex-direction: column;
+}
+
+.about-screen.about-middle-box {
+    width: 600px;
+    height: 400px;
+}
+
+.text-style{
+    text-align: justify;
+    /* font-weight: bold; */
+    font-size: 16px;
+    margin: 35px;
+}

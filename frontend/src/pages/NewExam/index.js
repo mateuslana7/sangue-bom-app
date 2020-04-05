@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
+import swal from 'sweetalert';
 
 import Header from '../shared/Header';
 import './styles.css';
@@ -15,7 +16,7 @@ export default function NewExam(){
     const [valorLdl, setValorLdl] = useState(0);
 
     const history = useHistory();
-
+    
     async function handleNewExam(e) {
         e.preventDefault();
         
@@ -33,7 +34,11 @@ export default function NewExam(){
                     Authorization: usuarioId,
                 }
             })
-            alert('Exame adicionado com sucesso!');
+            swal({
+                title: "Pronto!",
+                text: "Exame adicionado com sucesso!",
+                icon: "success",
+            })
             history.push('/inicio')
         }catch (err){
             alert('Erro ao adicionar exame, tente novamente.')

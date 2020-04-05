@@ -37,6 +37,7 @@ export default function Logon(){
         <div>
             <Header />
             <div className="app-container">
+                <div className="aba">Login</div>
                 <div className="middle-box text-center loginscreen">
                     <img src={logoImg} alt="" />
                     <div>
@@ -63,8 +64,7 @@ export default function Logon(){
                             <button className="button" type="submit">ENTRAR</button>
                         </form>
                         <div className="login-footnote">
-                            <Link to="/recuperar-senha">Esqueci minha senha</Link>
-                            <p> | </p>
+                            <Link style={{marginRight: 18, marginLeft: 10}} to="/recuperar-senha">Esqueci minha senha</Link>
                             <Link to="/cadastro">Cadastrar</Link>
                         </div>
                     </div>

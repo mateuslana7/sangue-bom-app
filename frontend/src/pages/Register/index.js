@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
-// import bcrypt from 'bcrypt-pbkdf';
+import swal from 'sweetalert';
 
 import './styles.css'
 import Header from '../Logon/Header';
@@ -11,48 +11,81 @@ export default function Register(){
     const [nome, setNome] = useState('');
     const [dataNasc, setDataNasc] = useState('');
     const [peso, setPeso] = useState('');
-    const [sexo, setSexo] = useState('');
+    var [sexo, setSexo] = useState('');
     const [tipoSang, setTipoSang] = useState('');
     const [nomeUsuario, setNomeUsuario] = useState('');
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+    const [confirmSenha, setConfirmSenha] = useState('');
 
     const history = useHistory();
 
     // const salt = '$2b$10$98kkLiN1rIgvAsbayyd1Be';
     // var senhaEncriptada = bcrypt.hashSync(senha, salt);
 
-    async function handleRegister(e) {
-        e.preventDefault();
-        
-        const data = {
-            nome,
-            dataNasc,
-            peso,
-            sexo,
-            tipoSang,
-            nomeUsuario,
-            email,
-            senha
-        };
-
-        try{
-            const response = await api.post('usuario', data);
-            alert(response.data.status);
-            history.push('/')
-        }catch (err){
-            alert('Erro no cadastro, tente novamente.')
+    function validatePassword(){
+        if(senha !== confirmSenha){
+            swal({
+                title: "Tente Novamente!",
+                text: "A confirmação de senha inserida é diferente da senha.",
+                icon: "warning",
+            })
+            return false;
         }
+        return true;
     }
 
-    // function validatePassword(){
+    async function handleRegister(e) {
+        e.preventDefault();
 
-    // }
+        if(validatePassword()){
+            const data = {
+                nome,
+                dataNasc,
+                peso,
+                sexo,
+                tipoSang,
+                nomeUsuario,
+                email,
+                senha
+            };
+
+            switch(sexo){
+                case 'Masculino':
+                    sexo = 'M';
+                    break;
+                case 'Feminino':
+                    sexo = 'F';
+                    break;
+                default:
+                    sexo = 'M';
+            }    
+
+            try{
+                const response = await api.post('usuario', data);
+                swal({
+                    title: "Confirmado!",
+                    text: response.data.status,
+                    icon: "success",
+                })
+                history.push('/')
+            }catch (err){
+                //USAR MENSGAM DO BACKEND DPS
+                swal({
+                    title: "Falha!",
+                    text: 'Erro no cadastro, tente novamente.',
+                    icon: "error",
+                    dangerMode: true,
+                })
+            }
+        }
+    }
 
     return (
         <div>
             <Header />
             <div className="app-container">
+                <div className="aba">Cadastro</div>
                 <div className="middle-box registerscreen">
                     <div>
                         <form onSubmit={handleRegister} className="form-group">
@@ -88,33 +121,19 @@ export default function Register(){
                                         />
                                     </div>
                                     <div className="col-sm-12 col-lg-6">
-                                        <label>Sexo: </label><br></br>
-                                        <input 
-                                            className="form-control" 
+                                        <label>Sexo: </label>
+                                        <select 
+                                            className="form-control"
                                             value={sexo}
-                                            onChange={e => setSexo(e.target.value)}
-                                        />
-                                        {/* <input 
-                                            className="radiobutton" 
-                                            type="radio"
-                                            value="M"
-                                            checked={this.state.sexo === 'M'}
-                                            onSelect={e => setSexo(e.target.value)}  
-                                        />
-                                        <label>Masculino</label>
-                                        <input 
-                                            className="radiobutton" 
-                                            type="radio"
-                                            value={"F"}
-                                            checked={this.state.sexo === 'F'}
-                                            onChange={e => setSexo(e.target.value)}   
-                                        />
-                                        <label>Feminino</label> */}
+                                            onChange={e => setSexo(e.target.value)} 
+                                        >
+                                            <option>Masculino</option>
+                                            <option>Feminino</option>
+                                        </select>
                                     </div>
                                     <div className="col-sm-12 col-lg-6">
                                         <label>Tipo Sanguíneo:</label>
-                                        <select 
-                                            name="tipoSang"    
+                                        <select    
                                             className="form-control"
                                             value={tipoSang}
                                             onChange={e => setTipoSang(e.target.value)} 
@@ -158,13 +177,22 @@ export default function Register(){
                                             className="form-control" 
                                             placeholder="Mínimo 8 caracteres" 
                                             required={true}
+                                            minLength={8}
                                             value={senha}
                                             onChange={e => setSenha(e.target.value)}
                                         />
                                     </div>
                                     <div className="col-sm-12 col-lg-6">
                                         <label>*Confirmar senha:</label>
-                                        <input name="senha" type="password" className="form-control" placeholder="Mínimo 8 caracteres" required={true}/>
+                                        <input  
+                                            type="password" 
+                                            className="form-control" 
+                                            placeholder="Confirmação de senha" 
+                                            required={true}
+                                            minLength={8}
+                                            value={confirmSenha}
+                                            onChange={e => setConfirmSenha(e.target.value)}
+                                        />
                                     </div>
                                     <div className="col-sm-12 col-lg-6">
                                         <Link to="/">
