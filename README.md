@@ -5,3 +5,5 @@ Os objetivos da disciplina não incluiam a construção da aplicação utilizand
 - NodeJS
 - ReactJS 
 - SQLite3
+
+Para executar a aplicação primeiramente certifique-se que você tem o Node Package Manager(NPM) e o React instalados em sua máquina. Em seguida abra o seu terminal e execute o comando "npm install" nos diretórios do backend e do frontend, para instalar as dependências necessárias para a execução da api e da interface respectivamente. Feito isso, execute o comando "npm start" também em ambos os diretórios para iniciar a execução da aplicação.
