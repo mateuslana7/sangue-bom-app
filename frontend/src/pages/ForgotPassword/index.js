@@ -1,26 +1,41 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
+import swal from 'sweetalert';
 
-import Header from '../Logon/Header';
+import Header from '../shared/Header';
 import logoImg from '../../assets/logo-without-text.png';
 
-import generateUniqueId from '../../utils/generateUniqueId';
-// import api from '../../services/api'; USAR DPS PARA SALVAR NOVA SENHA
+import api from '../../services/api'; 
 
 export default function ForgotPassword(){
     const [email, setEmail] = useState('');
 
-    function sendEmail(){
-        const password = generateUniqueId();
-        return password;
-        // alert("Enviando email para: "+email+"\n"+"Nova senha: "+password);
-        //FAZER A LÓGICA PARA ENVIO DE EMAILS E ATUALIZAÇÃO DE SENHA DO BANCO
-        // try{
-        //     await api.put('usuario', password);
-        //     history.push('/')
-        // }catch (err){
-        //     alert('Erro no cadastro, tente novamente.')
-        // }
+    const history = useHistory();
+
+    async function sendMail(e){
+        e.preventDefault();
+
+        const data = {
+            email 
+        }
+
+        try {
+            const response = await api.put('usuario', data);
+            //ARRUMAR DPS
+            swal ({
+                title: 'Confirmado',
+                text: response.data.message,
+                icon: 'success'
+            });
+            history.push('/');
+        } catch (err) {
+            swal ({
+                title: 'Erro',
+                text: 'Email não cadastrado, tente novamente.',
+                icon: 'error'
+            });
+        }
+        
     }
 
     return (
@@ -34,7 +49,7 @@ export default function ForgotPassword(){
                         <div className="col-sm-12 col-lg-12">
                             <p>VOCÊ RECEBERÁ UMA NOVA SENHA</p>
                         </div>
-                        <form onSubmit={sendEmail}>
+                        <form onSubmit={sendMail}>
                             <div className="form-group">
                                 <input 
                                     type="email" 

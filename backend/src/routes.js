@@ -11,6 +11,7 @@ routes.post('/sessions', SessionController.create);
 
 routes.get('/usuarios', UsuarioController.index);
 routes.post('/usuario', UsuarioController.create);
+routes.put('/usuario', UsuarioController.forgotPassword);
 
 routes.get('/exames', PerfilController.listExams);
 routes.get('/perfil', PerfilController.index);

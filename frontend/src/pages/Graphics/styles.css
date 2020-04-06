@@ -1,5 +1,18 @@
+.middle-box-graphics {
+    flex-direction: column;
+}
+
 .chart-style{
     height: 100%;
     width: 100%;
     margin: 30px;
+}
+
+.button-back-graphics {
+    width: 300px;
+    height: 40px;
+    background: #434649;
+    border: 0;
+    border-radius: 8px;
+    color: #FFF;
 }

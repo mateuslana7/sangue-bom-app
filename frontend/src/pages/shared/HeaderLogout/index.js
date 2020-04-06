@@ -5,7 +5,8 @@ import logoImg from '../../../assets/white-logo.png';
 
 import './styles.css'
 
-export default function Header(){   
+export default function HeaderLogout(){  
+    
     return (
 
         <nav className="navbar navbar-expand-lg">

@@ -7,7 +7,7 @@ import api from '../../services/api'
 import './styles.css';
 
 import logoImg from '../../assets/logo-without-text.png';
-import Header from './Header';
+import Header from '../shared/Header';
 
 export default function Logon(){
     const [nomeUsuario, setNomeUsuario] = useState('');

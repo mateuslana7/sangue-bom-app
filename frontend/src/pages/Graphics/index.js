@@ -1,4 +1,5 @@
 import React, { useEffect } from 'react';
+import { Link, useHistory } from 'react-router-dom';
 
 import './styles.css';
 
@@ -6,45 +7,60 @@ import CanvasJS from '../../assets/canvasjs/canvasjs.min'
 import api from '../../services/api'
 
 import Header from '../shared/Header';
+import swal from 'sweetalert';
 
 
 export default function Graphics(){
 
     const usuarioId = localStorage.getItem('usuarioId');
 
+    const history = useHistory();
+
     function showGraph(dptsHdl, dptsLdl) {
-        let chart = new CanvasJS.Chart("chartContainer", {
-            animationEnabled: true,
-            exportEnabled: true,
-            title: {
-                text: "Níveis de Colesterol"
-            },
-            axisX: {
-                title: "Datas"
-            },
-            axisY: {
-                title: "HDL"
-            },
-            axisY2: {
-                title: "LDL"
-            },
-            data: [{
-                type: "column",
-                name: "HDL",
-                showInLegend: true,      
-                legendMarkerColor: "#CF3537",
-                dataPoints: dptsHdl
-            },
-            {
-                type: "column",
-                name: "LDL",
-                axisYType: "secondary",
-                showInLegend: true,
-                legendMarkerColor: "#68322B",
-                dataPoints: dptsLdl
-            }]
-        });
-        chart.render();
+        if(dptsHdl.length > 0){
+            let chart = new CanvasJS.Chart("chartContainer", {
+                animationEnabled: true,
+                exportEnabled: true,
+                title: {
+                    text: "Níveis de Colesterol"
+                },
+                axisX: {
+                    title: "Datas"
+                },
+                axisY: {
+                    title: "HDL"
+                },
+                axisY2: {
+                    title: "LDL"
+                },
+                data: [{
+                    type: "column",
+                    name: "HDL",
+                    showInLegend: true,      
+                    legendMarkerColor: "#CF3537",
+                    dataPoints: dptsHdl
+                },
+                {
+                    type: "column",
+                    name: "LDL",
+                    axisYType: "secondary",
+                    showInLegend: true,
+                    legendMarkerColor: "#68322B",
+                    dataPoints: dptsLdl
+                }]
+            });
+            chart.render();
+        }
+        else {
+            swal({
+                text: "Você ainda não tem exames cadastrados!",
+                icon: "info",
+            }).then(async (confirm) => {
+                if (confirm) {
+                    history.push('/inicio');
+                }
+            });
+        }
     }
 
     useEffect(() => {
@@ -76,10 +92,15 @@ export default function Graphics(){
 
     //ARRUMAR DPS
     return (
-        <div className="exams-container">
-            <Header />     
-            <div className="middle-box exams-middle-box exams-screen">
-                <div className="chart-style" id="chartContainer" style={{height: 370, width: 600}}></div>
+        <div>
+            <Header />
+            <div className="exams-container">     
+                <div className="middle-box middle-box-graphics exams-screen">
+                    <div className="chart-style" id="chartContainer" style={{height: 370, width: 600}}></div>
+                    <Link to="/inicio">
+                        <button className="button-back-graphics">VOLTAR</button>
+                    </Link>
+                </div>
             </div>
         </div>
     )

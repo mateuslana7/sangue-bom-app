@@ -41,75 +41,82 @@ export default function NewExam(){
             })
             history.push('/inicio')
         }catch (err){
-            alert('Erro ao adicionar exame, tente novamente.')
+            swal({
+                title: "Erro!",
+                text: "Falha ao adicionar exame, tente novamente.",
+                icon: "error",
+                dangerMode: true
+            })
         }
     }
 
     return (
-        <div className="newexam-container">
+        <div>
             <Header />
-            <div className="middle-box newexam-screen">
-                <div>
-                    <form onSubmit={handleNewExam} className="form-group">
-                        <div className="container">
-                            <div className="row">
-                                <div className="col-sm-12 col-lg-12">
-                                    <label>INCLUIR DADOS:</label>
-                                </div>
-                                <div className="col-sm-12 col-lg-6">
-                                    <label>Consultório:</label>
-                                    <input 
-                                        className="form-control" 
-                                        placeholder="Ex.: Consultório Silva" 
-                                        required={true}
-                                        value={consultorio}
-                                        onChange={e => setConsultorio(e.target.value)}
-                                    />
-                                </div>
-                                <div className="col-sm-12 col-lg-6">
-                                    <label>Data do Exame:</label>
-                                    <input 
-                                        type="date" 
-                                        className="form-control" 
-                                        placeholder="Ex.: João da Silva" 
-                                        required={true}
-                                        value={dataExame}
-                                        onChange={e => setDataExame(e.target.value)} 
-                                    />
-                                </div>
-                                <div className="col-sm-12 col-lg-6">
-                                    <label>Valor HDL:</label>
-                                    <input 
-                                        type="number" 
-                                        className="form-control" 
-                                        placeholder="0" 
-                                        required={true}
-                                        value={valorHdl}
-                                        onChange={e => setValorHdl(e.target.value)} 
-                                    />
-                                </div>
-                                <div className="col-sm-12 col-lg-6">
-                                    <label>Valor LDL:</label>
-                                    <input 
-                                        type="number" 
-                                        className="form-control" 
-                                        placeholder="0" 
-                                        required={true} 
-                                        value={valorLdl}
-                                        onChange={e => setValorLdl(e.target.value)}
-                                    />
-                                </div>
-                                <div className="col-sm-12 col-lg-6">
-                                    <Link to="/inicio">
-                                        <button className="button-back">VOLTAR</button>
-                                    </Link>
-                                </div>
-                                <div className="col-sm-12 col-lg-6">
-                                    <button className="button" type="submit">CONFIRMAR</button>
+            <div className="newexam-container">
+                <div className="middle-box newexam-screen">
+                    <div>
+                        <form onSubmit={handleNewExam} className="form-group">
+                            <div className="container">
+                                <div className="row">
+                                    <div className="col-sm-12 col-lg-12">
+                                        <label>INCLUIR DADOS:</label>
+                                    </div>
+                                    <div className="col-sm-12 col-lg-6">
+                                        <label>Consultório:</label>
+                                        <input 
+                                            className="form-control" 
+                                            placeholder="Ex.: Consultório Silva" 
+                                            required={true}
+                                            value={consultorio}
+                                            onChange={e => setConsultorio(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="col-sm-12 col-lg-6">
+                                        <label>Data do Exame:</label>
+                                        <input 
+                                            type="date" 
+                                            className="form-control" 
+                                            placeholder="Ex.: João da Silva" 
+                                            required={true}
+                                            value={dataExame}
+                                            onChange={e => setDataExame(e.target.value)} 
+                                        />
+                                    </div>
+                                    <div className="col-sm-12 col-lg-6">
+                                        <label>Valor HDL:</label>
+                                        <input 
+                                            type="number" 
+                                            className="form-control" 
+                                            placeholder="0" 
+                                            required={true}
+                                            value={valorHdl}
+                                            onChange={e => setValorHdl(e.target.value)} 
+                                        />
+                                    </div>
+                                    <div className="col-sm-12 col-lg-6">
+                                        <label>Valor LDL:</label>
+                                        <input 
+                                            type="number" 
+                                            className="form-control" 
+                                            placeholder="0" 
+                                            required={true} 
+                                            value={valorLdl}
+                                            onChange={e => setValorLdl(e.target.value)}
+                                        />
+                                    </div>
+                                    <div className="col-sm-12 col-lg-6">
+                                        <Link to="/inicio">
+                                            <button className="button-back">VOLTAR</button>
+                                        </Link>
+                                    </div>
+                                    <div className="col-sm-12 col-lg-6">
+                                        <button className="button" type="submit">CONFIRMAR</button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>

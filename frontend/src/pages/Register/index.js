@@ -3,7 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import swal from 'sweetalert';
 
 import './styles.css'
-import Header from '../Logon/Header';
+import Header from '../shared/Header';
 
 import api from '../../services/api'
 

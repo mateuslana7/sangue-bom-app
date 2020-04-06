@@ -3,7 +3,7 @@ import React from 'react';
 import './styles.css';
 import logoImg from '../../assets/logo.png'
 
-import Header from '../Logon/Header';
+import Header from '../shared/Header';
 
 export default function About(){
     return (

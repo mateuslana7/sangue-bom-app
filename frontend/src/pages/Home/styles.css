@@ -6,11 +6,6 @@
     margin: 32px auto;
 }
 
-.home-container header {
-    display: flex;
-    align-items: center;
-}
-
 .home-container ul {
     display: grid;
     grid-template-columns: 1fr 1fr;

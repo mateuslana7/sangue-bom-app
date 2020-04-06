@@ -5,11 +5,6 @@
     margin: 32px auto;
 }
 
-.exams-container header {
-    display: flex;
-    align-items: center;
-}
-
 .middle-box-exams {
     flex-direction: column;
     margin: 20px;
@@ -31,9 +26,17 @@
     color: #FFF;
 }
 
+.middle-box table td{
+    text-align: center; 
+    color: #CF3537;
+    font-weight: bold;
+}
+
 .scroll {
 	overflow: auto; 
-    max-height: 500px;
+    max-height: 415px;
+    position: absolute;
+    top: 160px;
 }
 
 .button-group {
@@ -88,6 +91,6 @@
     text-align: center;
     text-decoration: none;
     transition: filter 0.2s;
-    margin-top: 100px;
+    margin-top: 430px;
 }
 
