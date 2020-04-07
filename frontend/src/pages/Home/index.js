@@ -13,7 +13,8 @@ export default function Home(){
     return (
         <div>
             <Header/>
-            <div className="home-container">
+            <div className="app-container">
+                <div className="tab-img tab-position-home"><div className="tab-text">Exames</div></div>
                 <div className="middle-box text-center home-screen">
                     <ul>
                         <li>

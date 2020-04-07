@@ -52,14 +52,8 @@ export default function Graphics(){
             chart.render();
         }
         else {
-            swal({
-                text: "Você ainda não tem exames cadastrados!",
-                icon: "info",
-            }).then(async (confirm) => {
-                if (confirm) {
-                    history.push('/inicio');
-                }
-            });
+            history.push('/inicio');
+            swal("","Você ainda não tem exames cadastrados!","info");
         }
     }
 
@@ -73,7 +67,7 @@ export default function Graphics(){
             }
         }).then(response => {
             response.data.map(exame => {
-                exame.dataExame = new Date(exame.dataExame);
+                exame.dataExame = new Date(exame.dataExame+" EDT");
                 var nivelHdl = {};
                 var nivelLdl = {};
                 nivelHdl.label = Intl.DateTimeFormat('pt-BR').format(exame.dataExame);
@@ -88,13 +82,14 @@ export default function Graphics(){
             })
             showGraph(niveisHdl, niveisLdl);
         })
-    },[usuarioId]);
+    },);
 
     //ARRUMAR DPS
     return (
         <div>
             <Header />
-            <div className="exams-container">     
+            <div className="app-container"> 
+                <div className="tab-img tab-position-exams"><div className="tab-text">Exames</div></div>    
                 <div className="middle-box middle-box-graphics exams-screen">
                     <div className="chart-style" id="chartContainer" style={{height: 370, width: 600}}></div>
                     <Link to="/inicio">

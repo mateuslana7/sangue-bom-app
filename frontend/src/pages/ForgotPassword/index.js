@@ -21,19 +21,11 @@ export default function ForgotPassword(){
 
         try {
             const response = await api.put('usuario', data);
-            //ARRUMAR DPS
-            swal ({
-                title: 'Confirmado',
-                text: response.data.message,
-                icon: 'success'
-            });
+            //OLHAR DPS
+            swal ('Confirmado', response.data.message,'success');
             history.push('/');
         } catch (err) {
-            swal ({
-                title: 'Erro',
-                text: 'Email não cadastrado, tente novamente.',
-                icon: 'error'
-            });
+            swal ('Erro', 'Email não cadastrado, tente novamente.', 'error');
         }
         
     }
@@ -42,12 +34,12 @@ export default function ForgotPassword(){
         <div>
             <Header />
             <div className="app-container">
-                <div className="aba">Esqueci Minha Senha</div>
+                <div className="tab-img tab-position"><div className="tab-text">Nova Senha</div></div>
                 <div className="middle-box text-center loginscreen">
                     <img src={logoImg} alt="" />
                     <div>
                         <div className="col-sm-12 col-lg-12">
-                            <p>VOCÊ RECEBERÁ UMA NOVA SENHA</p>
+                            <p>Você receberá uma nova senha!</p>
                         </div>
                         <form onSubmit={sendMail}>
                             <div className="form-group">

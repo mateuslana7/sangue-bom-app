@@ -9,6 +9,13 @@
     justify-content: center;
 }
 
+.tab-register-position {
+
+    margin-left: -500px;
+    /* margin-right: inherit; */
+    /* margin-left: -1180px */
+}
+
 .middle-box form{
     margin: 10px;
 }

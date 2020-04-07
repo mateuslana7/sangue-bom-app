@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import { Link, useHistory } from 'react-router-dom';
-// import {} from 'react-icons/fa'
+import swal from 'sweetalert';
 
 import api from '../../services/api'
 
@@ -29,7 +29,7 @@ export default function Logon(){
             localStorage.setItem('nomeUsuario', response.data.nome);
             history.push('/inicio');
         } catch (err) {
-            alert('Falha no login, tente novamente.');
+            swal ('Erro', 'Usuário e/ou senha incorreto(s), tente novamente.', 'error');
         }
     }
 
@@ -37,7 +37,7 @@ export default function Logon(){
         <div>
             <Header />
             <div className="app-container">
-                <div className="aba">Login</div>
+                <div className="tab-img tab-position"><div className="tab-text">Login</div></div>
                 <div className="middle-box text-center loginscreen">
                     <img src={logoImg} alt="" />
                     <div>

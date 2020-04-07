@@ -1,4 +1,6 @@
 const connection = require('../database/connection');
+const encrypt = require('./PasswordController');
+const bcrypt = require('bcrypt');
 
 module.exports = {
     async index(request, response) {
@@ -6,7 +8,7 @@ module.exports = {
 
         const usuario = await connection('usuario')
             .where('id', usuario_id)
-            .select('nome', 'dataNasc', 'peso', 'tipoSang', 'nomeUsuario', 'email');
+            .select('*');
 
         return response.json(usuario);
     },
@@ -23,11 +25,11 @@ module.exports = {
 
     async edit(request, response){
         const usuario_id = request.headers.authorization;
-        const {nome, dataNasc, peso, tipoSang, nomeUsuario, email} = request.body;
+        const {nome, dataNasc, peso, sexo, tipoSang, nomeUsuario, email} = request.body;
 
         const usuario = await connection('usuario')
             .where('id', usuario_id)
-            .select('id','nome', 'dataNasc', 'peso', 'tipoSang', 'nomeUsuario', 'email')
+            .select('id','nome', 'dataNasc', 'peso', 'sexo', 'tipoSang', 'nomeUsuario', 'email')
             .first();
     
         if(usuario.id !== usuario_id){
@@ -41,6 +43,8 @@ module.exports = {
             await connection('usuario').where('id', usuario_id).update('dataNasc', dataNasc);
         if(usuario.peso !== peso)
             await connection('usuario').where('id', usuario_id).update('peso', peso);
+        if(usuario.sexo !== sexo)
+            await connection('usuario').where('id', usuario_id).update('sexo', sexo);
         if(usuario.tipoSang !== tipoSang)
             await connection('usuario').where('id', usuario_id).update('tipoSang', tipoSang);
         if(usuario.nomeUsuario !== nomeUsuario)
@@ -66,5 +70,29 @@ module.exports = {
         await connection('usuario').where('id', usuario_id).delete();
 
         return response.status(204).send();
+    },
+
+    async changePassword(request, response){
+        const usuario_id = request.headers.authorization;
+        var { senhaAtual, novaSenha } = request.body;
+
+        //ENCRIPTANDO A SENHA
+        const salt = encrypt.getSalt();
+        senhaAtual = bcrypt.hashSync(senhaAtual, salt);
+        novaSenha = bcrypt.hashSync(novaSenha, salt);
+
+        const usuario = await connection('usuario')
+            .where('id', usuario_id)
+            .select('id', 'senha')
+            .first();
+
+        if(usuario.id !== usuario_id || usuario.senha !== senhaAtual){
+            return response.status(401).json({error: 'Operation not permitted.'});
+        }
+        // usuario.senha !== senhaAtual
+
+        await connection('usuario').where('id', usuario_id).update('senha', novaSenha);
+
+        return response.json({msg: 'Senha alterada com sucesso!'});
     }
 }

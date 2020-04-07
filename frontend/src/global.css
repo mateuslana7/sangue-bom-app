@@ -8,6 +8,7 @@
 }
 
 body {
+    /* position: relative; */
     font: 400 14px Roboto, sans-serif;
     background-image: url('./assets/background.png');
     background-size: cover;
@@ -16,6 +17,13 @@ body {
 
 input, button, textarea{
     font: 400 18px Roboto, sans-serif;
+}
+
+label{
+    margin-top: 10px;
+    color: #903031;
+    font-weight: bold;
+    font-size: 16px;
 }
 
 button, a {
@@ -89,6 +97,53 @@ header button:hover {
     justify-content: center;
 }
 
+.app-container ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-gap: 24px;
+    list-style: none;
+}
+
+.app-container ul li {
+    position: relative;
+}
+
+.app-container ul li img {
+    margin-bottom: 0px;
+    margin-top: 20px;
+    margin-left: 25px;
+}
+
+/*MELHORAR DEPOIS O ALINHAMENTO DA ABA*/
+.tab-img {
+    height: 35px;
+    width: 150px;
+    background: url('./assets/tab.png');
+    background-size: cover;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.tab-position{
+    margin-left: -200px;
+    /* margin-right: inherit; */
+    /* margin-left: -1180px */
+}
+
+.tab-text {
+    color:#fff;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    text-align: center;
+}
+
+.top-flap {
+    height: 35px;
+}
+
 .aba {
     width: 25%;
     height: 30px;
@@ -118,13 +173,6 @@ header button:hover {
     justify-content: center;
 }
 
-.middle-box label{
-    margin-top: 10px;
-    color: #903031;
-    font-weight: bold;
-    font-size: 16px;
-}
-
 .button{
     width: 100%;
     height: 40px;
@@ -136,7 +184,7 @@ header button:hover {
     text-align: center;
     text-decoration: none;
     transition: filter 0.2s;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .button-back {
@@ -150,7 +198,7 @@ header button:hover {
     text-align: center;
     text-decoration: none;
     transition: filter 0.2s;
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .button:hover{

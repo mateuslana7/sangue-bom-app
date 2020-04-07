@@ -11,6 +11,7 @@ import NewExam from '../NewExam';
 import Exams from '../Exams';
 import UserProfile from '../UserProfile';
 import Graphics from '../Graphics';
+import EditUserProfile from '../EditUserProfile';
 
 export default function AppAfterLogin() {
 
@@ -32,6 +33,7 @@ export default function AppAfterLogin() {
                 <Route path="/exames/graficos" component={Graphics} />
                 <Route path="/exames" component={Exams} />
                 <Route path="/meu-perfil" component={UserProfile} />
+                <Route path="/perfil/editar" component={EditUserProfile} />
             </Switch>
         </BrowserRouter>
     );

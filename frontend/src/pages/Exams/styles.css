@@ -1,17 +1,13 @@
-.exams-container {
-    width: 100%;
-    max-width: 1180px;
-    padding: 0 30px;
-    margin: 32px auto;
+.tab-position-exams {
+    margin-left: -500px;
 }
 
-.middle-box-exams {
+/* .middle-box-exams {
     flex-direction: column;
     margin: 20px;
-}
+} */
 
 .exams-screen.middle-box {
-    margin: 80px auto;
     width: 700px;
     height: 500px;
 }
@@ -19,6 +15,8 @@
 .middle-box table {
     margin-top: 20px;
     width: 600px;
+    
+    /* position: relative; */
 }
 
 .middle-box table thead{
@@ -26,11 +24,24 @@
     color: #FFF;
 }
 
+.middle-box table thead th{
+    text-align: center;
+    /* position: sticky;
+    top: 0; */
+}
+
 .middle-box table td{
-    text-align: center; 
+    text-align: center;
     color: #CF3537;
     font-weight: bold;
 }
+
+/* .scroll-body {
+    overflow: auto; 
+    max-height: 415px;
+    position: absolute;
+    top: 160px;
+} */
 
 .scroll {
 	overflow: auto; 

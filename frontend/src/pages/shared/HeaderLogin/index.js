@@ -23,7 +23,7 @@ export default function HeaderLogin(){
                 Authorization: usuarioId,
             }
         }).then(response => {
-            response.data[0].dataNasc = new Date(response.data[0].dataNasc);
+            response.data[0].dataNasc = new Date(response.data[0].dataNasc+" EDT");
             setUsuario(response.data[0]);
         })
     },[usuarioId]);
@@ -48,6 +48,24 @@ export default function HeaderLogin(){
         history.push('/');
     }
 
+    async function handleEditUserProfile(){
+        try {
+                const response = await api.get('perfil', {
+                headers: {
+                    Authorization: usuarioId,
+                }
+            });
+            history.push({
+                pathname: '/perfil/editar',
+                state: { detail: response.data[0] }
+            });
+            console.log(response.data);
+        } catch (err) {
+            swal('Erro', 'Falha ao editar perfil!', 'error');
+        }
+
+    }
+
     return (
         <div>
             <nav className="navbar navbar-expand-lg">
@@ -67,7 +85,7 @@ export default function HeaderLogin(){
                                 <Link to="/contato" className="nav-link">Fale Conosco</Link>
                             </li>
                             <li className="nav-item">
-                                <Link to="sobre" className="nav-link">Sobre o Sistema</Link>
+                                <Link to="/sobre" className="nav-link">Sobre o Sistema</Link>
                             </li>
                             <li className="nav-item">
                                 <p className="nav-user">{usuario.nomeUsuario}</p>
@@ -105,7 +123,7 @@ export default function HeaderLogin(){
 
                 <Modal.Footer>
                     <Button variant="outline-danger" onClick={handleClose}>Fechar</Button>
-                    <Button variant="outline-secondary" onClick={handleClose}>Editar</Button>
+                    <Button variant="outline-secondary" onClick={handleEditUserProfile}>Editar</Button>
                 </Modal.Footer>
             </Modal>
 

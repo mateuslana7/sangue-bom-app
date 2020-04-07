@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import swal from 'sweetalert';
 
 import Header from '../shared/Header';
@@ -10,12 +10,16 @@ import api from '../../services/api'
 export default function NewExam(){
     const usuarioId = localStorage.getItem('usuarioId');
 
-    const [consultorio, setConsultorio] = useState('');
-    const [dataExame, setDataExame] = useState('');
-    const [valorHdl, setValorHdl] = useState(0);
-    const [valorLdl, setValorLdl] = useState(0);
-
     const history = useHistory();
+    const location = useLocation();
+    
+    const obj = (location.state !== undefined) ? location.state.detail : {};
+    const formType = (location.state !== undefined) ? 'EDITAR' : 'CADASTRAR';
+
+    const [consultorio, setConsultorio] = useState(obj.consultorio);
+    const [dataExame, setDataExame] = useState(obj.dataExame);
+    const [valorHdl, setValorHdl] = useState(obj.valorHdl);
+    const [valorLdl, setValorLdl] = useState(obj.valorLdl);
     
     async function handleNewExam(e) {
         e.preventDefault();
@@ -28,39 +32,39 @@ export default function NewExam(){
         };
 
         try{
-            await api.post('exames', data, 
-            {
-                headers:{
-                    Authorization: usuarioId,
-                }
-            })
-            swal({
-                title: "Pronto!",
-                text: "Exame adicionado com sucesso!",
-                icon: "success",
-            })
+            const auth = { headers: {Authorization: usuarioId}};
+            var msg = '';
+            if(formType === 'CADASTRAR'){
+                msg = "Exame adicionado com sucesso!";
+                await api.post('exames', data, auth);
+            }
+            if(formType === 'EDITAR'){
+                msg = "Exame editado com sucesso!";
+                await api.put(`exames/${obj.id}`, data, auth)
+            }
+            swal("Pronto!", msg, "success");
             history.push('/inicio')
         }catch (err){
-            swal({
-                title: "Erro!",
-                text: "Falha ao adicionar exame, tente novamente.",
-                icon: "error",
-                dangerMode: true
-            })
+            if(formType === 'CADASTRAR')
+                msg = 'Falha ao adicionar exame, tente novamente.';
+            if(formType === 'EDITAR')
+                msg = 'Falha ao editar exame, tente novamente.';
+            swal('Erro!', msg, 'error');
         }
     }
 
     return (
         <div>
             <Header />
-            <div className="newexam-container">
-                <div className="middle-box newexam-screen">
+            <div className="app-container">
+                <div className="tab-img tab-position-home"><div className="tab-text">Exames</div></div>
+                <div className="middle-box home-screen">
                     <div>
                         <form onSubmit={handleNewExam} className="form-group">
                             <div className="container">
                                 <div className="row">
                                     <div className="col-sm-12 col-lg-12">
-                                        <label>INCLUIR DADOS:</label>
+                                        <label>{formType} DADOS:</label>
                                     </div>
                                     <div className="col-sm-12 col-lg-6">
                                         <label>Consultório:</label>

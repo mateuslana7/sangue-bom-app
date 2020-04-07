@@ -25,11 +25,7 @@ export default function Register(){
 
     function validatePassword(){
         if(senha !== confirmSenha){
-            swal({
-                title: "Tente Novamente!",
-                text: "A confirmação de senha inserida é diferente da senha.",
-                icon: "warning",
-            })
+            swal("Tente Novamente!", "A confirmação de senha inserida é diferente da senha.","warning")
             return false;
         }
         return true;
@@ -63,20 +59,11 @@ export default function Register(){
 
             try{
                 const response = await api.post('usuario', data);
-                swal({
-                    title: "Confirmado!",
-                    text: response.data.status,
-                    icon: "success",
-                })
+                swal("Confirmado!", response.data.status, "success")
                 history.push('/')
             }catch (err){
                 //USAR MENSGAM DO BACKEND DPS
-                swal({
-                    title: "Falha!",
-                    text: 'Erro no cadastro, tente novamente.',
-                    icon: "error",
-                    dangerMode: true,
-                })
+                swal("Erro!",'Falha no cadastro, tente novamente.',"error");
             }
         }
     }
@@ -85,7 +72,7 @@ export default function Register(){
         <div>
             <Header />
             <div className="app-container">
-                <div className="aba">Cadastro</div>
+                <div className="tab-img tab-register-position"><div className="tab-text">Cadastro</div></div>
                 <div className="middle-box registerscreen">
                     <div>
                         <form onSubmit={handleRegister} className="form-group">

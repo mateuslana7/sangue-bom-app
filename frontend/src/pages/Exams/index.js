@@ -38,23 +38,17 @@ export default function Exams(){
         }).then(response => {
             if(response.data.length > 0){
                 response.data.map(exame => {
-                    exame.dataExame = new Date(exame.dataExame);
+                    exame.dataExame = new Date(exame.dataExame+" EDT");
                     return true;
                 })
                 setExames(response.data);
             }
             else {
-                swal({
-                    text: "Você ainda não tem exames cadastrados!",
-                    icon: "info",
-                }).then(async (confirm) => {
-                    if (confirm) {
-                        history.push('/inicio');
-                    }
-                });
+                history.push('/inicio');
+                swal("","Você ainda não tem exames cadastrados!","info");
             }
         })
-    },[usuarioId]);
+    },);
 
     async function handleDeleteExam(id){
         try {
@@ -63,38 +57,35 @@ export default function Exams(){
                     Authorization: usuarioId,
                 }
             });
-            swal("Pronto! Este exame foi deletado!", {
-                icon: "success",
-            });
+            swal("", "Pronto! Este exame foi deletado!", "success");
             setExames(exames.filter(exame => exame.id !== id));
         } catch (err) {
-            swal({
-                title: "Erro!",
-                text: "Falha ao deletar exame, tente novamente.",
-                icon: "error",
-                dangerMode: true
-            })
+            swal("Erro!", "Falha ao deletar exame, tente novamente.", "error");
         }
     }
 
     async function handleEditExam(id){
         try {
-            const response = await api.get(`exames/${id}`, {
+                const response = await api.get(`exames/${id}`, {
                 headers: {
                     Authorization: usuarioId,
                 }
             });
-            console.log(response.data);
+            history.push({
+                pathname: '/exames/editar',
+                state: { detail: response.data }
+            });
         } catch (err) {
-            alert('Erro ao obter exame!');
+            swal('Erro', 'Falha ao editar exame!', 'error');
         }
     }
 
     return (
         <div>
             <Header />
-            <div className="exams-container">
-                <div className="middle-box middle-box-exams exams-screen">
+            <div className="app-container">
+                <div className="tab-img tab-position-exams"><div className="tab-text">Exames</div></div>
+                <div className="middle-box exams-screen">
                     <div className="scroll">    
                         <table className="table table-striped table-bordered table-sm table-secondary">
                             <thead>
@@ -113,11 +104,9 @@ export default function Exams(){
                                     <td>{exame.valorLdl}</td>
                                     <td>
                                         <div className="button-group">
-                                            <Link onClick={() => handleEditExam(exame.id)} to="/exames/editar">
-                                                <button className="button-edit">
-                                                    <FaPencilAlt size={18} color="#fff"></FaPencilAlt>
-                                                </button>
-                                            </Link>
+                                            <button className="button-edit" onClick={() => handleEditExam(exame.id)}>
+                                                <FaPencilAlt size={18} color="#fff"></FaPencilAlt>
+                                            </button>
                                             <button onClick={() => deleteAlert(exame.id)} className="button-delete">
                                                 <FaTrashAlt size={18} color="#fff"></FaTrashAlt>
                                             </button>

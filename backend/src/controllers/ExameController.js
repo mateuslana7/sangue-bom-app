@@ -1,6 +1,12 @@
 const connection = require('../database/connection');
 
 module.exports = {
+
+    async index(request, response){
+        const exames = await connection('exame').select('*');
+        return response.json(exames)
+    },
+
     async create(request, response){
         const { dataExame, valorHdl, valorLdl, consultorio } = request.body;
         const usuario_id = request.headers.authorization;
@@ -22,7 +28,7 @@ module.exports = {
 
         const exame = await connection('exame')
             .where('id', id)
-            .select('usuario_id','consultorio', 'dataExame', 'valorHdl', 'valorLdl')
+            .select('id','usuario_id','consultorio', 'dataExame', 'valorHdl', 'valorLdl')
             .first();
         
         if(exame.usuario_id !== usuario_id){

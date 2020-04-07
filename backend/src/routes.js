@@ -17,7 +17,9 @@ routes.get('/exames', PerfilController.listExams);
 routes.get('/perfil', PerfilController.index);
 routes.put('/perfil', PerfilController.edit);
 routes.delete('/perfil', PerfilController.delete);
+routes.put('/alterar-senha', PerfilController.changePassword);
 
+routes.get('/todos-exames', ExameController.index);
 routes.post('/exames', ExameController.create);
 routes.delete('/exames/:id', ExameController.delete);
 routes.put('/exames/:id', ExameController.edit)
