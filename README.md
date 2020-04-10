@@ -12,18 +12,20 @@ Os objetivos da disciplina não incluiam a construção da aplicação utilizand
 
 ## 2. Executanto a Aplicação
 
-Para executar a aplicação primeiramente certifique-se que você tem o Node Package Manager(NPM) e o React instalados em sua máquina. Em seguida abra o seu terminal e execute o comando "npm install" nos diretórios do backend e do frontend, para instalar as dependências necessárias para a execução da api e da interface respectivamente. Feito isso, execute o comando "npm start" também em ambos os diretórios para iniciar a execução da aplicação.
+Para executar a aplicação primeiramente certifique-se que você tem o Node Package Manager(NPM) e o React instalados em sua máquina. Em seguida abra o seu terminal e execute o comando `npm install` nos diretórios do backend e do frontend, para instalar as dependências necessárias para a execução da api e da interface respectivamente. Feito isso, execute o comando `npm start` também em ambos os diretórios para iniciar a execução da aplicação.
 
 ## 3. Configurando a Recuperação de Senha
 
-Para a funcionalidade de recuperação de senha por envio de email funcionar, crie um arquivo "config.json" dentro do diretório "backend/src" da seguinte forma:
+Para a funcionalidade de recuperação de senha por envio de email funcionar, crie um arquivo `config.json` dentro do diretório `backend/src` da seguinte forma:
 
+```
 {
     "user": "seuemail@servidor.com",
     "pass": "suasenha"
 }
+```
 
-Pode ser necesário que você faça alterações na função "forgotPasswordSendMail" dentro do diretório "src/utils" para definir as configurações do envio de acordo com o servidor de email utilizado. No link abaixo você encontra como configurar para servidores Gmail e Outlook. Você pode acessar também a documentação oficial da biblioteca nodemailer, utilizada para enviar emails (segundo link).
+Pode ser necesário que você faça alterações na função `forgotPasswordSendMail` dentro do diretório `src/utils` para definir as configurações do envio de acordo com o servidor de email utilizado. No link abaixo você encontra como configurar para servidores Gmail e Outlook. Você pode acessar também a documentação oficial da biblioteca nodemailer, utilizada para enviar emails (segundo link).
 
 https://ourcodeworld.com/articles/read/264/how-to-send-an-email-gmail-outlook-and-zoho-using-nodemailer-in-node-js
 
