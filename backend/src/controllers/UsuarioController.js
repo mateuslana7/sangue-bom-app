@@ -20,7 +20,7 @@ module.exports = {
             .first();
 
         if(usuario == undefined){
-            return response.status(401).json({error: 'Email não cadastrado, tente novamente.'});
+            return response.status(401).send('Email não cadastrado, tente novamente.');
         }
 
         const senha = generateUniqueId();
@@ -34,7 +34,7 @@ module.exports = {
             return response.json({message: 'Uma nova senha foi enviada para o seu email.'});
         }
 
-        return response.status(401).send();
+        return response.status(400).send('Não foi possível enviar uma nova senha, tente novamente.');
     },
 
     async create(request, response){
@@ -52,10 +52,10 @@ module.exports = {
             .first();
 
         if(username)
-            return response.status(400).json({error: 'Este nome de usuário já está em uso.'});
+            return response.status(400).send('Este nome de usuário já está em uso.');
 
         if(userEmail)
-            return response.status(400).json({error: 'Este email já está cadastrado no sistema.'});
+            return response.status(400).send('Este email já está cadastrado no sistema.');
         
 
         //CRIPTOGRAFIA DA SENHA 

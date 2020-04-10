@@ -32,9 +32,9 @@ module.exports = {
             .select('id','nome', 'dataNasc', 'peso', 'sexo', 'tipoSang', 'nomeUsuario', 'email')
             .first();
     
-        if(usuario.id !== usuario_id){
-            return response.status(401).json({error: 'Operation not permitted.'});
-        }
+        if(usuario.id !== usuario_id)
+            return response.status(401).send('Operação não permitida.');
+
 
         //MELHORAR DEPOIS
         if(usuario.nome !== nome)

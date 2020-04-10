@@ -116,8 +116,8 @@ export default function Register(){
             swal("Confirmado", 'Edição salva com sucesso!', "success")
             history.push('/inicio')
         }catch (err){
-            //USAR MENSGAM DO BACKEND DPS
-            swal("Erro!",'Falha na edição, tente novamente.',"error");
+            err.response === undefined ? swal("Erro!", "Não foi possível acessar o banco de dados, ele está offline.", "error") : swal("Erro!", err.response.data, "error");
+            // swal("Erro!",'Falha na edição, tente novamente.',"error");
         }
     }
 

@@ -25,7 +25,7 @@ export default function ForgotPassword(){
             swal ('Confirmado', response.data.message,'success');
             history.push('/');
         } catch (err) {
-            swal ('Erro', 'Email não cadastrado, tente novamente.', 'error');
+            err.response === undefined ? swal("Erro!", "Não foi possível acessar o banco de dados, ele está offline.", "error") : swal("Erro!", err.response.data, "error");
         }
         
     }

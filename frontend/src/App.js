@@ -7,7 +7,7 @@ function App() {
     <div>
       <Routes />
       <footer className="page-footer font-small app-footer">
-        <div className="text-center py-3 footer-text"><strong>Sangue Bom</strong> 1.0.3</div>
+        <div className="text-center py-3 footer-text"><strong>Sangue Bom</strong> 1.0.4</div>
       </footer>
     </div>
   );

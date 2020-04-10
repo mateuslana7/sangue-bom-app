@@ -5,12 +5,6 @@ const encrypt = require('./PasswordController');
 module.exports = {
     async create(request, response){
         var { nomeUsuario, senha } = request.body;
-
-        // const usuario = await connection('usuario')
-        //     .where('nomeUsuario', nomeUsuario)
-        //     .where('senha', senha)
-        //     .select('nome')
-        //     .first();
         
         //ENCRIPTANDO A SENHA
         const salt = encrypt.getSalt();
@@ -23,7 +17,7 @@ module.exports = {
 	        .first();
         
         if(!usuario){
-            return response.status(400).json({error: 'Incorrect username or password'});
+            return response.status(400).send('Usuário e/ou senha incorreto(s), tente novamente.');
         }
 
         return response.json(usuario);

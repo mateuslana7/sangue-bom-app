@@ -62,8 +62,7 @@ export default function Register(){
                 swal("Confirmado!", response.data.status, "success")
                 history.push('/')
             }catch (err){
-                //USAR MENSGAM DO BACKEND DPS
-                swal("Erro!",'Falha no cadastro, tente novamente.',"error");
+                err.response === undefined ? swal("Erro!", "Não foi possível acessar o banco de dados, ele está offline.", "error") : swal("Erro!", err.response.data, "error");
             }
         }
     }
@@ -93,6 +92,7 @@ export default function Register(){
                                         <input 
                                             type="date" 
                                             className="form-control"
+                                            required={true}
                                             value={dataNasc}
                                             onChange={e => setDataNasc(e.target.value)} 
                                         />
