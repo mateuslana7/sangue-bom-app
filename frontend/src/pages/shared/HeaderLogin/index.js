@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useHistory } from 'react-router-dom';
-import { Modal, Button } from 'react-bootstrap'
 import { FaBars, FaUser, FaPowerOff } from 'react-icons/fa'
 import logoImg from '../../../assets/white-logo.png';
 import swal from 'sweetalert';
+
+import UserProfile from '../../UserProfile';
 
 import api from '../../../services/api';
 
@@ -13,9 +14,7 @@ export default function HeaderLogin(){
     const usuarioId = localStorage.getItem('usuarioId');
     const history = useHistory();
     
-    const [show, setShow] = useState(false);
-    const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
+    const [modalShow, setModalShow] = useState(false);
 
     useEffect(() => {
         api.get('perfil',{
@@ -48,24 +47,6 @@ export default function HeaderLogin(){
         history.push('/');
     }
 
-    async function handleEditUserProfile(){
-        try {
-                const response = await api.get('perfil', {
-                headers: {
-                    Authorization: usuarioId,
-                }
-            });
-            history.push({
-                pathname: '/perfil/editar',
-                state: { detail: response.data[0] }
-            });
-            console.log(response.data);
-        } catch (err) {
-            swal('Erro', 'Falha ao editar perfil!', 'error');
-        }
-
-    }
-
     return (
         <div>
             <nav className="navbar navbar-expand-lg">
@@ -91,7 +72,7 @@ export default function HeaderLogin(){
                                 <p className="nav-user">{usuario.nomeUsuario}</p>
                             </li>
                             <li>
-                                <button onClick={handleShow} className="userprofile-button">
+                                <button onClick={() => setModalShow(true)} className="userprofile-button">
                                     <FaUser size={18} color="#CF3537"></FaUser>
                                 </button>
                             </li>
@@ -104,29 +85,7 @@ export default function HeaderLogin(){
                     </div>
                 </div>
             </nav>
-
-            <Modal show={show} onHide={handleClose}>
-                <Modal.Header closeButton>
-                    <Modal.Title><h4>Perfil de Usuário</h4></Modal.Title>
-                </Modal.Header>
-
-                <Modal.Body>
-                    <div>
-                        <p><b>Nome: </b>{usuario.nome}</p>
-                        <p><b>Data de Nascimento: </b>{Intl.DateTimeFormat('pt-BR').format(usuario.dataNasc)}</p>
-                        <p><b>Peso: </b>{usuario.peso}</p>
-                        <p><b>Tipo Sanguíneo: </b>{usuario.tipoSang}</p>
-                        <p><b>Nome de Usuário: </b>{usuario.nomeUsuario}</p>
-                        <p><b>Email: </b>{usuario.email}</p>
-                    </div>
-                </Modal.Body>
-
-                <Modal.Footer>
-                    <Button variant="outline-danger" onClick={handleClose}>Fechar</Button>
-                    <Button variant="outline-secondary" onClick={handleEditUserProfile}>Editar</Button>
-                </Modal.Footer>
-            </Modal>
-
+            <UserProfile show={modalShow} onHide={() => setModalShow(false)} size='sm' />
         </div>        
     )
 }

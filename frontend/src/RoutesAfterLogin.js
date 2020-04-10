@@ -1,19 +1,18 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 
-import Logon from '../Logon';
-import About from '../About';
-import ContactUs from '../ContactUs';
-import Register from '../Register';
-import ForgotPassword from '../ForgotPassword';
-import Home from '../Home';
-import NewExam from '../NewExam';
-import Exams from '../Exams';
-import UserProfile from '../UserProfile';
-import Graphics from '../Graphics';
-import EditUserProfile from '../EditUserProfile';
+import Logon from './pages/Logon';
+import About from './pages/About';
+import ContactUs from './pages/ContactUs';
+import Register from './pages/Register';
+import ForgotPassword from './pages/ForgotPassword';
+import Home from './pages/Home';
+import NewExam from './pages/NewExam';
+import Exams from './pages/Exams';
+import Graphics from './pages/Graphics';
+import EditUserProfile from './pages/EditUserProfile';
 
-export default function AppAfterLogin() {
+export default function RoutesAfterLogin() {
 
     if(!("usuarioId" in localStorage))
         return (<Redirect to='/' />);
@@ -32,7 +31,6 @@ export default function AppAfterLogin() {
                 <Route path="/exames/editar" component={NewExam} />
                 <Route path="/exames/graficos" component={Graphics} />
                 <Route path="/exames" component={Exams} />
-                <Route path="/meu-perfil" component={UserProfile} />
                 <Route path="/perfil/editar" component={EditUserProfile} />
             </Switch>
         </BrowserRouter>

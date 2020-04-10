@@ -2,15 +2,13 @@ import React from 'react';
 import './global.css'
 import Routes from './routes';
 
-// import logoImg from './assets/logo.png'
-
 function App() {
   return (
     <div>
-      {/* <header>
-        <img className="logo-img" src={logoImg} width="200" alt="Sangue Bom" />
-      </header> */}
       <Routes />
+      <footer className="page-footer font-small app-footer">
+        <div className="text-center py-3 footer-text"><strong>Sangue Bom</strong> 1.0.3</div>
+      </footer>
     </div>
   );
 }

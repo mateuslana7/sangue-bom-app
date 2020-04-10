@@ -6,7 +6,7 @@ import About from './pages/About';
 import ContactUs from './pages/ContactUs';
 import Register from './pages/Register';
 import ForgotPassword from './pages/ForgotPassword';
-import AppAfterLogin from './pages/AppAfterLogin/AppAfterLogin';
+import RoutesAfterLogin from './RoutesAfterLogin'
 
 export default function Routes(){
 
@@ -18,7 +18,7 @@ export default function Routes(){
                 <Route path="/contato" component={ContactUs} />
                 <Route path="/cadastro" component={Register} />
                 <Route path="/recuperar-senha" component={ForgotPassword} />
-                <Route path="" component={AppAfterLogin} />
+                <Route path="" component={RoutesAfterLogin} />
             </Switch>
         </BrowserRouter>
     )

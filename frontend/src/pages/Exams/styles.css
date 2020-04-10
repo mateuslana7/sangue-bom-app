@@ -2,6 +2,12 @@
     margin-left: -500px;
 }
 
+.sort-button{
+    background: #CF3537;
+    color: #FFF;
+    border: 0;
+}
+
 /* .middle-box-exams {
     flex-direction: column;
     margin: 20px;
@@ -45,7 +51,7 @@
 
 .scroll {
 	overflow: auto; 
-    max-height: 415px;
+    max-height: 438px;
     position: absolute;
     top: 160px;
 }
@@ -103,5 +109,6 @@
     text-decoration: none;
     transition: filter 0.2s;
     margin-top: 430px;
+    padding: 0px 100px;
 }
 

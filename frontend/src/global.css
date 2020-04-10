@@ -69,6 +69,15 @@ header button:hover {
     border-color: #dcdcd6;
 }
 
+.app-footer {
+    background: #CF3537;
+}
+
+.footer-text {
+    color: #FFF;
+    font-size: 15px;
+}
+
 .absolute {
     height: 50px;
     width: 200px;

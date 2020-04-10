@@ -67,7 +67,9 @@ module.exports = {
             return response.status(401).json({error: 'Operation not permitted.'});
         }
 
+        //DELETA O USUARIO E TODOS OS EXAMES CADASTRADOS POR ELE
         await connection('usuario').where('id', usuario_id).delete();
+        await connection('exame').where('usuario_id', usuario_id).select('*').delete();
 
         return response.status(204).send();
     },
@@ -89,7 +91,6 @@ module.exports = {
         if(usuario.id !== usuario_id || usuario.senha !== senhaAtual){
             return response.status(401).json({error: 'Operation not permitted.'});
         }
-        // usuario.senha !== senhaAtual
 
         await connection('usuario').where('id', usuario_id).update('senha', novaSenha);
 

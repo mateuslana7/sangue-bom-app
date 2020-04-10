@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 import { FaBars } from 'react-icons/fa'
 import logoImg from '../../../assets/white-logo.png';
 
-import './styles.css'
+// import './styles.css'
 
 export default function HeaderLogout(){  
     

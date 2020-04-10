@@ -2,38 +2,7 @@ const connection = require('../database/connection')
 const bcrypt = require('bcrypt');
 const encrypt = require('./PasswordController');
 const generateUniqueId = require('../utils/generateUniqueId');
-const nodemailer = require('nodemailer');
-const account = require('../config.json')
-
-var u = account.user;
-var p = account.pass;
-
-function forgotPasswordEmail(email, newPassword){
-    var transporter = nodemailer.createTransport({
-        host: 'smtp.gmail.com',
-        port: 465,
-        secure: true, 
-        auth: {
-            user: u,
-            pass: p
-        }
-    });
-
-    var mailOptions = {
-        from: 'contato.sanguebom.app@gmail.com', 
-        to: email, 
-        subject: 'Sangue Bom - Nova Senha de Acesso ', 
-        text: 'Sua nova senha de acesso é: '+newPassword, 
-    };
-
-    transporter.sendMail(mailOptions, function(error, info){
-        if(error){
-            return console.log(error);
-        }
-
-        console.log('Message sent: ' + info.response);
-    });
-}
+const forgotPasswordSendMail = require('../utils/forgotPasswordSendMail');
 
 module.exports = {
 
@@ -60,15 +29,34 @@ module.exports = {
         const salt = encrypt.getSalt();
         const senhaEncriptada = bcrypt.hashSync(senha, salt);
 
-        forgotPasswordEmail(email, senha);
-        
-        await connection('usuario').where('email', email).update('senha', senhaEncriptada);
+        if(forgotPasswordSendMail(email, senha, usuario.nomeUsuario)){
+            await connection('usuario').where('email', email).update('senha', senhaEncriptada);
+            return response.json({message: 'Uma nova senha foi enviada para o seu email.'});
+        }
 
-        return response.json({message: 'Uma nova senha foi enviada para o seu email.'});
+        return response.status(401).send();
     },
 
     async create(request, response){
         var {nome, dataNasc, peso, sexo, tipoSang, nomeUsuario, email, senha} = request.body;
+
+        //VERIFICA A EXISTENCIA DO USERNAME OU EMAIL
+        const username = await connection('usuario')
+            .where('nomeUsuario', nomeUsuario)
+            .select('nomeUsuario')
+            .first();
+        
+        const userEmail = await connection('usuario')
+            .where('email', email)
+            .select('email')
+            .first();
+
+        if(username)
+            return response.status(400).json({error: 'Este nome de usuário já está em uso.'});
+
+        if(userEmail)
+            return response.status(400).json({error: 'Este email já está cadastrado no sistema.'});
+        
 
         //CRIPTOGRAFIA DA SENHA 
         const salt = encrypt.getSalt();

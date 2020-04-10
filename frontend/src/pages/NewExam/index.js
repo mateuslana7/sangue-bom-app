@@ -3,7 +3,7 @@ import { Link, useHistory, useLocation } from 'react-router-dom';
 import swal from 'sweetalert';
 
 import Header from '../shared/Header';
-import './styles.css';
+// import './styles.css';
 
 import api from '../../services/api'
 
@@ -16,10 +16,10 @@ export default function NewExam(){
     const obj = (location.state !== undefined) ? location.state.detail : {};
     const formType = (location.state !== undefined) ? 'EDITAR' : 'CADASTRAR';
 
-    const [consultorio, setConsultorio] = useState(obj.consultorio);
-    const [dataExame, setDataExame] = useState(obj.dataExame);
-    const [valorHdl, setValorHdl] = useState(obj.valorHdl);
-    const [valorLdl, setValorLdl] = useState(obj.valorLdl);
+    const [consultorio, setConsultorio] = useState(obj.consultorio || '');
+    const [dataExame, setDataExame] = useState(obj.dataExame || '');
+    const [valorHdl, setValorHdl] = useState(obj.valorHdl || 0);
+    const [valorLdl, setValorLdl] = useState(obj.valorLdl || 0);
     
     async function handleNewExam(e) {
         e.preventDefault();
@@ -43,7 +43,7 @@ export default function NewExam(){
                 await api.put(`exames/${obj.id}`, data, auth)
             }
             swal("Pronto!", msg, "success");
-            history.push('/inicio')
+            formType === 'cadastrar' ? history.push('/inicio') : history.push('/exames') 
         }catch (err){
             if(formType === 'CADASTRAR')
                 msg = 'Falha ao adicionar exame, tente novamente.';
@@ -110,7 +110,7 @@ export default function NewExam(){
                                         />
                                     </div>
                                     <div className="col-sm-12 col-lg-6">
-                                        <Link to="/inicio">
+                                        <Link to={formType === 'CADASTRAR' ? "/inicio" : '/exames'}>
                                             <button className="button-back">VOLTAR</button>
                                         </Link>
                                     </div>

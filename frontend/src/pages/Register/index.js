@@ -46,15 +46,15 @@ export default function Register(){
                 senha
             };
 
-            switch(sexo){
+            switch(data.sexo){
                 case 'Masculino':
-                    sexo = 'M';
+                    data.sexo = 'M';
                     break;
                 case 'Feminino':
-                    sexo = 'F';
+                    data.sexo = 'F';
                     break;
                 default:
-                    sexo = 'M';
+                    data.sexo = 'M';
             }    
 
             try{
@@ -114,7 +114,7 @@ export default function Register(){
                                             value={sexo}
                                             onChange={e => setSexo(e.target.value)} 
                                         >
-                                            <option>Masculino</option>
+                                            <option selected >Masculino</option>
                                             <option>Feminino</option>
                                         </select>
                                     </div>
@@ -125,6 +125,7 @@ export default function Register(){
                                             value={tipoSang}
                                             onChange={e => setTipoSang(e.target.value)} 
                                         >
+                                            <option>Não sei</option>
                                             <option>A+</option>
                                             <option>A-</option>
                                             <option>B+</option>
@@ -133,7 +134,6 @@ export default function Register(){
                                             <option>AB-</option>
                                             <option>O+</option>
                                             <option>O-</option>
-                                            <option>Não sei</option>
                                         </select>
                                     </div>
                                     <div className="col-sm-12 col-lg-6">

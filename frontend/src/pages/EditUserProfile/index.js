@@ -2,7 +2,6 @@ import React, {useState} from 'react';
 import { Link, useHistory, useLocation } from 'react-router-dom';
 import { Modal } from 'react-bootstrap'
 import swal from 'sweetalert';
-import { FaTrashAlt } from 'react-icons/fa'
 
 import './styles.css'
 import Header from '../shared/Header';
@@ -20,6 +19,18 @@ export default function Register(){
     const location = useLocation();
 
     const obj = (location.state !== undefined) ? location.state.detail : {};
+
+    switch(obj.sexo){
+        case 'M':
+            obj.sexo = 'Masculino';
+            break;
+        case 'F':
+            obj.sexo = 'Feminino';
+            break;
+        default:
+            obj.sexo = 'Masculino';
+            break;
+    }
 
     const [nome, setNome] = useState(obj.nome);
     const [dataNasc, setDataNasc] = useState(obj.dataNasc);
@@ -84,15 +95,15 @@ export default function Register(){
             email,
         };
 
-        switch(sexo){
+        switch(data.sexo){
             case 'Masculino':
-                sexo = 'M';
+                data.sexo = 'M';
                 break;
             case 'Feminino':
-                sexo = 'F';
+                data.sexo = 'F';
                 break;
             default:
-                sexo = 'M';
+                data.sexo = 'M';
                 break;
         }
 
@@ -156,7 +167,7 @@ export default function Register(){
                                         />
                                     </div>
                                     <div className="col-sm-12 col-lg-4">
-                                        <button type="button" onClick={deleteAlert} className="button-edit-pass">EXCLUIR CONTA<FaTrashAlt className="trash-icon" /></button>
+                                        <button type="button" onClick={deleteAlert} className="button-edit-pass">EXCLUIR CONTA</button>
                                     </div>
                                     <div className="col-sm-12 col-lg-6">
                                         <label>Data de Nascimento:</label>
@@ -194,6 +205,7 @@ export default function Register(){
                                             value={tipoSang}
                                             onChange={e => setTipoSang(e.target.value)} 
                                         >
+                                            <option>Não sei</option>
                                             <option>A+</option>
                                             <option>A-</option>
                                             <option>B+</option>
@@ -202,7 +214,6 @@ export default function Register(){
                                             <option>AB-</option>
                                             <option>O+</option>
                                             <option>O-</option>
-                                            <option>Não sei</option>
                                         </select>
                                     </div>
                                     <div className="col-sm-12 col-lg-6">
@@ -288,9 +299,10 @@ export default function Register(){
                                 onChange={e => setConfirmNovaSenha(e.target.value)} 
                             />
                         </div>
+                        <hr className="horizontal-line" />
                         <div className="modal-btn-group">
-                            <button className="btn btn-outline-danger" type="button" onClick={handleClose}>Fechar</button>
-                            <button className="btn btn-outline-secondary" type="submit">Salvar</button>
+                            <button className="btn btn-secondary" type="button" onClick={handleClose}>Fechar</button>
+                            <button className="btn btn-danger" type="submit">Salvar</button>
                         </div>
                     </form>
                 </Modal.Body>
