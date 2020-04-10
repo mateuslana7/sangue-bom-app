@@ -15,7 +15,7 @@ Para a funcionalidade de recuperação de senha por envio de email funcionar, cr
     "pass": "suasenha"
 }
 
-Pode ser necesário que você faça alterações na função "forgotPasswordEmail" dentro do arquivo "UsuarioController.js" para definir as configurações do envio de acordo com o servidor de email utilizado. No link abaixo você encontra como configurar para servidores gmail, outlook. Você pode acessar também a documentação oficial da biblioteca nodemailer, utilizada para enviar emails (segundo link).
+Pode ser necesário que você faça alterações na função "forgotPasswordSendMail" dentro do diretório "src/utils" para definir as configurações do envio de acordo com o servidor de email utilizado. No link abaixo você encontra como configurar para servidores Gmail e Outlook. Você pode acessar também a documentação oficial da biblioteca nodemailer, utilizada para enviar emails (segundo link).
 
 https://ourcodeworld.com/articles/read/264/how-to-send-an-email-gmail-outlook-and-zoho-using-nodemailer-in-node-js
 
